@@ -13,4 +13,13 @@
     <ion-label>{{el}}</ion-label>
   </ion-item>
 </ion-list>
+<ion-button (click)="mybtn()">Кнопка</ion-button>
+<ion-input label="Default input" [(ngModel)]="myname"></ion-input>
+<ion-grid>
+  <ion-row *ngFor="let el of myBooks">
+    <ion-col>{{ el.book_name }}</ion-col>
+    <ion-col>{{ el.book_author }}</ion-col>
+  </ion-row>
+</ion-grid>
+
 </ion-content>
