@@ -9,5 +9,7 @@ import { Component } from '@angular/core';
 export class HomePage {
 
   constructor() {}
+  myname: string = "Ivan Alekseevich"
+  mylist: string[] = ["1984", "471 градус по F", "Марадёр", "Патфайндер", "Ищейка", "Пицца", "А места здесь тихие", "Гарри Потер", "Escape From Tarkov", "Пикник на обочине"]
 
 }
