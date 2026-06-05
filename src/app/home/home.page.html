@@ -1,25 +1,51 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Kovalenko UwU, {{myname}}
+      Kovalenko UwU
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Таблица</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-list>
-  <ion-item *ngFor="let el of mylist">
-    <ion-label>{{el}}</ion-label>
-  </ion-item>
-</ion-list>
-<ion-button (click)="mybtn()">Кнопка</ion-button>
-<ion-input label="Default input" [(ngModel)]="myname"></ion-input>
-<ion-grid>
-  <ion-row *ngFor="let el of myBooks">
-    <ion-col>{{ el.book_name }}</ion-col>
-    <ion-col>{{ el.book_author }}</ion-col>
-  </ion-row>
-</ion-grid>
+  <!-- Кнопка добавления записи -->
+  <ion-button (click)="addRow()" expand="block" color="success" class="ion-margin">
+    <ion-icon name="add-outline" slot="start"></ion-icon>
+    Добавить запись
+  </ion-button>
 
+  <!-- Сама таблица -->
+  <ion-grid>
+    <!-- Шапка таблицы -->
+    <ion-row class="ion-text-center">
+      <ion-col class="table-header"><strong>Имя</strong></ion-col>
+      <ion-col class="table-header"><strong>Возраст</strong></ion-col>
+      <ion-col class="table-header"><strong>Действие</strong></ion-col>
+    </ion-row>
+
+    <!-- Тело таблицы -->
+    <ion-row *ngFor="let item of tableData; let i = index" class="ion-align-items-center ion-text-center">
+      <ion-col>
+        <ion-input [(ngModel)]="item.name" placeholder="Введите имя"></ion-input>
+      </ion-col>
+      <ion-col>
+        <ion-input type="number" [(ngModel)]="item.age" placeholder="0"></ion-input>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="deleteRow(i)" fill="clear" color="danger">
+          <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Сообщение, если данных нет -->
+  <div *ngIf="tableData.length === 0" class="ion-padding ion-text-center">
+    <ion-text color="medium">Нет данных. Нажмите "Добавить запись".</ion-text>
+  </div>
 </ion-content>

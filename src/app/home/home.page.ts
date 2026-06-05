@@ -1,28 +1,36 @@
 import { Component } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-interface Book {
-  book_name: string
-  book_author: string
+interface TableRow {
+  name: string;
+  age: number | null;
 }
-
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class HomePage {
+  public tableData: TableRow[] = [
+    { name: 'Анна', age: 25 },
+    { name: 'Иван', age: 30 },
+    { name: 'Мария', age: 22 }
+  ];
 
-  constructor() {}
-  myname: string = "Ivan Alekseevich"
-  mylist: string[] = ["1984", "471 градус по F", "Марадёр", "Патфайндер", "Ищейка", "Пицца", "А места здесь тихие", "Гарри Потер", "Escape From Tarkov", "Пикник на обочине"]
-  myBooks: Book[] = [
-    {book_name: "Война и мир", book_author: "Толстой"},
-    {book_name: "Онегин", book_author: "Автор"}
-  ]
-  mybtn(){
-    this.myname = this.myname + "!"
+  addRow() {
+    const newRow: TableRow = {
+      name: 'Новый',
+      age: 0
+    };
+    this.tableData.push(newRow);
   }
 
+  deleteRow(index: number) {
+    this.tableData.splice(index, 1);
+  }
 }
