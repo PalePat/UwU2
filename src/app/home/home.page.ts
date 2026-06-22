@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 interface TableRow {
   name: string;
   age: number | null;
+  email: string;  // 
 }
 
 @Component({
@@ -17,19 +18,29 @@ interface TableRow {
 })
 export class HomePage {
   public tableData: TableRow[] = [
-    { name: 'Анна', age: 25 },
-    { name: 'Иван', age: 30 },
-    { name: 'Мария', age: 22 }
+    { name: 'Анна', age: 25, email: 'anna@mail.com' },
+    { name: 'Иван', age: 30, email: 'ivan@mail.com' },
+    { name: 'Мария', age: 22, email: 'maria@mail.com' }
   ];
 
+  // Метод для добавления строки
   addRow() {
     const newRow: TableRow = {
-      name: 'Новый',
-      age: 0
+      name: 'Новый пользователь',
+      age: 0,
+      email: 'new@mail.com'
     };
     this.tableData.push(newRow);
   }
 
+  // Метод для удаления ПОСЛЕДНЕЙ строки
+  deleteLastRow() {
+    if (this.tableData.length > 0) {
+      this.tableData.pop();  
+    }
+  }
+
+  // Метод для удаления КОНКРЕТНОЙ строки (если нужно будет)
   deleteRow(index: number) {
     this.tableData.splice(index, 1);
   }
