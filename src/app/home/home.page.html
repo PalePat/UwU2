@@ -1,25 +1,67 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Kovalenko UwU, {{myname}}
+      Kovalenko UwU
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Таблица</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-list>
-  <ion-item *ngFor="let el of mylist">
-    <ion-label>{{el}}</ion-label>
-  </ion-item>
-</ion-list>
-<ion-button (click)="mybtn()">Кнопка</ion-button>
-<ion-input label="Default input" [(ngModel)]="myname"></ion-input>
-<ion-grid>
-  <ion-row *ngFor="let el of myBooks">
-    <ion-col>{{ el.book_name }}</ion-col>
-    <ion-col>{{ el.book_author }}</ion-col>
-  </ion-row>
-</ion-grid>
+  <div class="button-group">
+    <ion-button (click)="addRow()" expand="block" color="success" class="ion-margin">
+      <ion-icon name="add-outline" slot="start"></ion-icon>
+      Добавить запись
+    </ion-button>
 
+    <ion-button (click)="deleteLastRow()" expand="block" color="danger" class="ion-margin">
+      <ion-icon name="trash-outline" slot="start"></ion-icon>
+      Удалить последнюю
+    </ion-button>
+  </div>
+
+  <ion-card>
+    <ion-card-content>
+      Всего записей: <strong>{{ tableData.length }}</strong>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row class="ion-text-center table-header">
+      <ion-col><strong>Имя</strong></ion-col>
+      <ion-col><strong>Возраст</strong></ion-col>
+      <ion-col><strong>Email</strong></ion-col> 
+    </ion-row>
+
+    <!-- Тело таблицы -->
+    <ion-row *ngFor="let item of tableData; let i = index" 
+             class="ion-align-items-center ion-text-center table-row">
+      
+      <!-- Колонка 1: Имя -->
+      <ion-col>
+        <ion-input [(ngModel)]="item.name" placeholder="Введите имя"></ion-input>
+      </ion-col>
+
+      <!-- Колонка 2: Возраст -->
+      <ion-col>
+        <ion-input type="number" [(ngModel)]="item.age" placeholder="0"></ion-input>
+      </ion-col>
+
+      <!-- Колонка 3: Email -->
+      <ion-col>
+        <ion-input [(ngModel)]="item.email" placeholder="email@mail.com"></ion-input>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <!-- Сообщение, если данных нет -->
+  <div *ngIf="tableData.length === 0" class="ion-padding ion-text-center">
+    <ion-text color="medium">Нет данных. Нажмите "Добавить запись".</ion-text>
+  </div>
 </ion-content>
